@@ -66,7 +66,7 @@ function handleMessage(sender_psid, recieved_message) {
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": "Hey! Can't believe this worked...Can you?"
+            "title": "Hey! Can't believe this worked...Can you?",
             "subtitle": "Tap a button to answer",
             "buttons": [
               {
