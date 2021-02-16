@@ -66,7 +66,7 @@ function handleMessage(sender_psid, recieved_message) {
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": "Hey! Can't believe this worked...Can you?",
+            "title": "Hello, are you ready for some optimism? ",
             "subtitle": "Tap a button to answer",
             "buttons": [
               {
@@ -94,9 +94,43 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   if (payload === 'yes') {
-    response = {'text': "Thank you for your faith in me that is really sweet."}
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "What do you want information about today?",
+            "subtitle": "Tap an option",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Vaccines",
+                "payload": "vaccines",
+              },
+              {
+                "type": "postback",
+                "title": "COVID Cases",
+                "payload": "cases",
+              },
+              {
+                "type": "postback",
+                "title": "Lockdowns",
+                "payload": "lockdown",
+              },
+              {
+                "type": "postback",
+                "title": "Please, I'm begging you to show me anything other than COVID news. Literally anything.",
+                "payload": "other",
+              }
+
+            ],
+          }]
+        }
+      }
+    }
   } else if (payload === 'no') {
-    response = {'text': "Yeah me neither, although I would appreciate some belief."}
+    response = {'text': "Ugh I get it. Come back whenever you are ready, your friendly neighborhood good news bot will be here."}
   }
   callSendAPI(sender_psid, response);
 }
