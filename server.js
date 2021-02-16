@@ -129,6 +129,7 @@ function handlePostback(sender_psid, received_postback) {
         }
       }
     }
+    console.log(response);
   } else if (payload === 'no') {
     response = {'text': "Ugh I get it. Come back whenever you are ready, your friendly neighborhood good news bot will be here."}
   }
