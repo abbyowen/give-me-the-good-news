@@ -115,14 +115,9 @@ function handlePostback(sender_psid, received_postback) {
               },
               {
                 "type": "postback",
-                "title": "Lockdowns",
-                "payload": "lockdown",
-              }/*,
-              {
-                "type": "postback",
                 "title": "Anything Else",
                 "payload": "other",
-              }*/
+              }
 
             ],
           }]
