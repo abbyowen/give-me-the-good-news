@@ -138,8 +138,8 @@ function handlePostback(sender_psid, received_postback) {
         console.log(`response body: ${body}`);
         var str =''
 
-        for (var i=0; i<res.body.results.length; i++) {
-          str = str + res.body.results[i].title + " ";
+        for (var i=0; i<body.results.length; i++) {
+          str = str + body.results[i].title + " ";
         }
         response = str;
 
