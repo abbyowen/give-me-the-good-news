@@ -61,14 +61,44 @@ function handleMessage(sender_psid, recieved_message) {
 
   if (recieved_message.text) {
     response={
-      "text": `Holy fuck this worked.`
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Hey! Can't believe this worked...Can you?"
+            "subtitle": "Tap a button to answer",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes"
+                "payload": "yes",
+              },
+              {
+                "type": "postback",
+                "title": "No",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
     }
   }
   callSendAPI(sender_psid, response);
 }
 
 function handlePostback(sender_psid, recieved_postback) {
+  let response;
 
+  let payload = received_postback.payload;
+
+  if (payload === 'yes') {
+    response = {'text': "Thank you for your faith in me that is really sweet."}
+  } else if (payload === 'no') {
+    response = {'text': "Yeah me neither, although I would appreciate some belief."}
+  }
+  callSendAPI(sender_psid, response);
 }
 
 function callSendAPI(sender_psid, response) {
