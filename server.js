@@ -131,7 +131,7 @@ function handlePostback(sender_psid, received_postback) {
   }
   else if (payload === 'other') {
     request({
-      "uri": `https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${txHI43IcrawEsJzOm3NTPW2BtEEtnotb}`,
+      "uri": `https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`,
       "method": "GET"
     }, (err, res, body) => {
       if (!err) {
