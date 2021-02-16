@@ -137,6 +137,7 @@ function handlePostback(sender_psid, received_postback) {
       if (!err) {
         console.log(res);
         var str =''
+        console.log(res.body);
         for (var i=0; i<res.body.results.length; i++) {
           str = str + res.body.results[i].title + " ";
         }
