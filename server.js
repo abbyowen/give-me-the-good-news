@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express().use(bodyParser.json());
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+
 app.listen(process.env.PORT || 8888, () => console.log('webhook is listening'));
 
 app.post('/webhook', function(req, res) {
@@ -11,6 +14,9 @@ app.post('/webhook', function(req, res) {
     body.entry.forEach(function(entry) {
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
+
+      let sender_psid = webhook_event.sender.id;
+      console.log('Sender PSID: '+ sender_psid);
     });
 
     res.status(200).send('EVENT_RECEIVED');
@@ -39,4 +45,17 @@ app.get('/webhook', function(req, res) {
       res.sendStatus(403);
     }
   }
-})
+});
+
+
+function handleMessage(sender_psid, recieved_message) {
+
+}
+
+function handlePostback(sender_psid, recieved_postback) {
+
+}
+
+function callSendAPI(sender_psid, response) {
+
+}
