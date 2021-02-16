@@ -125,8 +125,22 @@ function handlePostback(sender_psid, received_postback) {
       }
     }
 
-  } else if (payload === 'no') {
+  }
+  else if (payload === 'no') {
     response = {'text': "Ugh I get it. Come back whenever you are ready, your friendly neighborhood good news bot will be here."}
+  }
+  else if (payload === 'other') {
+    request({
+      "uri": `https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${txHI43IcrawEsJzOm3NTPW2BtEEtnotb}`,
+      "method": "GET"
+    }, (err, res, body) => {
+      if (!err) {
+        console.log(body.json());
+      } else {
+        console.log('An error occured'+error);
+      }
+
+    });
   }
   callSendAPI(sender_psid, response);
 }
