@@ -129,6 +129,7 @@ function handlePostback(sender_psid, received_postback) {
   else if (payload === 'no') {
     response = {'text': "Ugh I get it. Come back whenever you are ready, your friendly neighborhood good news bot will be here."}
   }
+
   else if (payload === 'other') {
     request({
       "uri": `https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`,
@@ -136,14 +137,13 @@ function handlePostback(sender_psid, received_postback) {
     }, (err, res, body) => {
       if (!err) {
         var body_JSON = JSON.parse(body);
-      
+
         var str =''
 
         for (var i=0; i<body_JSON.results.length; i++) {
           str = str + body_JSON.results[i].title + " ";
         }
         response = {'text': str};
-        console.log(response);
 
       } else {
         console.log('An error occured'+error);
@@ -151,6 +151,7 @@ function handlePostback(sender_psid, received_postback) {
 
     });
   }
+  console.log(response);
   callSendAPI(sender_psid, response);
 }
 
