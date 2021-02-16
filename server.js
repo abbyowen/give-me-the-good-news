@@ -81,7 +81,7 @@ function callSendAPI(sender_psid, response) {
   fetch(`https://graph.facebook.com/v2.6/me/messages`, {
     method: 'POST',
     headers: {
-      "access_token": process.env.PAGE_ACCESS_TOKEN
+      "Authoization": `Bearer ${process.env.PAGE_ACCESS_TOKEN}`
     },
     body: {
       request_body
