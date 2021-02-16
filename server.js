@@ -136,12 +136,12 @@ function handlePostback(sender_psid, received_postback) {
     }, (err, res, body) => {
       if (!err) {
         console.log(res.json());
-        var str =''
+        //var str =''
 
-        for (var i=0; i<res.body.results.length; i++) {
-          str = str + res.body.results[i].title + " ";
-        }
-        response = str;
+        //for (var i=0; i<res.body.results.length; i++) {
+          //str = str + res.body.results[i].title + " ";
+        //}
+        //response = str;
 
       } else {
         console.log('An error occured'+error);
