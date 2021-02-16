@@ -135,7 +135,13 @@ function handlePostback(sender_psid, received_postback) {
       "method": "GET"
     }, (err, res, body) => {
       if (!err) {
-        console.log(JSON.stringify(res));
+        console.log(res);
+        var str =''
+        for (var i=0; i<res.results.length; i++) {
+          str = str + res.results[i].title + " ";
+        }
+        response = str;
+
       } else {
         console.log('An error occured'+error);
       }
