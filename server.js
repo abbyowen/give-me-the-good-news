@@ -143,7 +143,7 @@ function handlePostback(sender_psid, received_postback) {
         for (var i=0; i<body_JSON.results.length; i++) {
           str = str + body_JSON.results[i].title + " ";
         }
-        response = {'text': str};
+        response = {'text': "DONE!"};
 
       } else {
         console.log('An error occured'+error);
