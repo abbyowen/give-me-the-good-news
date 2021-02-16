@@ -89,6 +89,7 @@ function handleMessage(sender_psid, recieved_message) {
 }
 
 function handlePostback(sender_psid, recieved_postback) {
+  console.log("in here");
   let response;
 
   let payload = received_postback.payload;
