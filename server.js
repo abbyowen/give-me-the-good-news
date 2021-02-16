@@ -22,9 +22,9 @@ app.post('/webhook', function(req, res) {
 
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message);
-      } /*else if (webhook_event.postback) {
+      } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
-      }*/
+      }
     });
 
     res.status(200).send('EVENT_RECEIVED');
@@ -89,7 +89,6 @@ function handleMessage(sender_psid, recieved_message) {
 }
 
 function handlePostback(sender_psid, recieved_postback) {
-  console.log("in here");
   let response;
 
   let payload = received_postback.payload;
