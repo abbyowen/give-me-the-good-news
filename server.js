@@ -88,7 +88,7 @@ function handleMessage(sender_psid, recieved_message) {
   callSendAPI(sender_psid, response);
 }
 
-function handlePostback(sender_psid, recieved_postback) {
+function handlePostback(sender_psid, received_postback) {
   let response;
 
   let payload = received_postback.payload;
