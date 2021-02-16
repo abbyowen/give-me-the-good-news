@@ -107,8 +107,8 @@ function handlePostback(sender_psid, received_postback) {
                 "type": "postback",
                 "title": "Vaccines",
                 "payload": "vaccines",
-              },
-              {
+              }
+              /*{
                 "type": "postback",
                 "title": "COVID Cases",
                 "payload": "cases",
@@ -122,14 +122,14 @@ function handlePostback(sender_psid, received_postback) {
                 "type": "postback",
                 "title": "Please, I'm begging you to show me anything other than COVID news. Literally anything.",
                 "payload": "other",
-              }
+              }*/
 
             ],
           }]
         }
       }
     }
-    console.log(response);
+
   } else if (payload === 'no') {
     response = {'text': "Ugh I get it. Come back whenever you are ready, your friendly neighborhood good news bot will be here."}
   }
