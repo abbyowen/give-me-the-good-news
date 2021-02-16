@@ -136,6 +136,8 @@ function handlePostback(sender_psid, received_postback) {
     }, (err, res, body) => {
       if (!err) {
         console.log(`response body: ${body}`);
+        console.log(`body results: ${body.results}`)
+        console.log(`body JSON: ${JSON.parse(body)}`)
         var str =''
 
         for (var i=0; i<body.results.length; i++) {
