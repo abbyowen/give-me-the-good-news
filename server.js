@@ -107,8 +107,8 @@ function handlePostback(sender_psid, received_postback) {
                 "type": "postback",
                 "title": "Vaccines",
                 "payload": "vaccines",
-              }
-              /*{
+              },
+              {
                 "type": "postback",
                 "title": "COVID Cases",
                 "payload": "cases",
@@ -120,9 +120,9 @@ function handlePostback(sender_psid, received_postback) {
               },
               {
                 "type": "postback",
-                "title": "Please, I'm begging you to show me anything other than COVID news. Literally anything.",
+                "title": "Anything. Else.",
                 "payload": "other",
-              }*/
+              }
 
             ],
           }]
