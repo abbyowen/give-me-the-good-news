@@ -120,7 +120,7 @@ function handlePostback(sender_psid, received_postback) {
               },
               {
                 "type": "postback",
-                "title": "Anything. Else.",
+                "title": "Anything Else",
                 "payload": "other",
               }
 
