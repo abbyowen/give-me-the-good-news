@@ -57,7 +57,7 @@ app.get('/webhook', function(req, res) {
 
 
 function handleMessage(sender_psid, recieved_message) {
-  let response;
+  var response;
 
   if (recieved_message.text) {
     response={
@@ -131,18 +131,26 @@ function handlePostback(sender_psid, received_postback) {
   }
 
   else if (payload === 'other') {
-    fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`)
-      .then(data => data.json()).then(function(response) {
-        console.log(repsonse);
-        /*var str =''
+    request({
+      "uri": `https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`,
+      "method": "GET"
+    }, (err, res, body) => {
+      if (!err) {
+        var body_JSON = JSON.parse(body);
+
+        var str =''
 
         for (var i=0; i<body_JSON.results.length; i++) {
           str = str + body_JSON.results[i].title + " ";
         }
-        response = {'text': str};*/
-      });
-    }
+        response = {'text': str};
 
+      } else {
+        console.log('An error occured'+error);
+      }
+
+    });
+  }
   console.log(response);
   callSendAPI(sender_psid, response);
 }
