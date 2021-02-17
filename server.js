@@ -330,7 +330,7 @@ function getVaccineNews(sender_psid) {
         }
       }
       naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
-        console.log(analysisResults.json());
+        console.log(analysisResults);
         }).catch(err => {
           console.log('error:', err);
         });
