@@ -144,11 +144,11 @@ function handlePostback(sender_psid, received_postback) {
           str = str + body_JSON.results[i].title + " ";
         }
         console.log(`str: ${str}`);
-        return {'text': str};
+        result = {'text': str};
 
       } else {
         console.log('An error occured'+error);
-        return {'text': "An error occured in fetching your optimism"}
+        result = {'text': "An error occured in fetching your optimism"}
       }
 
     });
