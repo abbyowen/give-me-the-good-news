@@ -234,7 +234,7 @@ function getOtherArticles(sender_psid) {
         }
      }
      console.log(`articles: ${articles}`);
-     response = {
+     var response = {
       "attachment": {
         "type": "template",
         "payload": {
@@ -247,7 +247,7 @@ function getOtherArticles(sender_psid) {
       }
     }
     console.log(response);
-     callSendAPI(sender_psid, response);
+    callSendAPI(sender_psid, response);
     });
 
 }
