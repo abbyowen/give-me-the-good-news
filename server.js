@@ -224,48 +224,11 @@ function getOtherArticles(sender_psid) {
           console.log(`including title: ${title}`);
           var url = result.results.url;
           var response = {
-            "attachment":{
-              "type":"template",
-              "payload":{
-                "template_type":"generic",
-                "elements":[
-                  {
-                    "title":title,
-                    "subtitle":"Click to open.",
-                    "default_action": {
-                      "type": "web_url",
-                      "url": url,
-                      "webview_height_ratio": "tall",
-                    }
-
-                  }
-                ]
-              }
-            }
-
-
-
-
-            /*
-            "attachment": {
-              "type": "template",
-              "payload": {
-                "template_type": "generic",
-                "elements": [{
-                  "title": title,
-                  "default_action": {
-                    "type": "web_url",
-                    "url": url,
-                    "webview_height_ratio": "tall"
-                  }
-                }]
-              }
-            }*/
+            "text": `${title}: ${url}`
           }
           callSendAPI(sender_psid, response);
         }
      }
-
     });
 
 }
