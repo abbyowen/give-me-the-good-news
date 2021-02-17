@@ -211,7 +211,7 @@ function getOtherArticles(sender_psid) {
       console.log(`result length: ${result.results.length}`);
       for (var i=0; i<result.results.length; i++) {
         var title = result.results[i].title;
-        var target_words = ["Trump", "COVID", "coronavirus", "pandemic", "lockdown", "bad", "sad", "Disease", "Covid-19"];
+        var target_words = ["Trump", "COVID", "coronavirus", "pandemic", "lockdown", "bad", "sad", "Disease", "Covid-19", "Covid", "Impeachment", "Impeached"];
         var include = true;
         for (var j=0; j<target_words.length; j++) {
           if (title.includes(target_words[j])) {
@@ -221,7 +221,15 @@ function getOtherArticles(sender_psid) {
         if (include == true) {
           console.log(`including title: ${title}`);
           var url = result.results.url;
-          articles.push(url);
+          articles.push({
+            "title": title,
+            "default_action": {
+              "type": "web_url",
+              "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+              "messenger_extensions": false,
+              "webview_height_ratio": "tall"
+            }
+          });
 
         }
 
@@ -229,7 +237,25 @@ function getOtherArticles(sender_psid) {
 
      }
      console.log(`articles: ${articles}`);
-     response = {'text': `HELLO!`};
+     response = {"attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "list",
+        "top_element_style": "compact",
+        "elements": [
+          articles
+        ],
+         "buttons": [
+          {
+            "title": "View More",
+            "type": "postback",
+            "payload": "payload"
+          }
+        ]
+      }
+    }
+  }
+    console.log(response);
      callSendAPI(sender_psid, response);
     });
 
