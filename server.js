@@ -223,6 +223,7 @@ function getOtherArticles(sender_psid) {
         if (include == true) {
           console.log(`including title: ${title}`);
           var url = result.results.url;
+          console.log(url);
           var response = {
             "text": `${title}: ${url}`
           }
