@@ -249,20 +249,7 @@ function getGIPHY(sender_psid) {
   fetch(`https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_KEY}&tag=&rating=pg-13`).then(
     data=>data.json()).then(function(result) {
       console.log(`result: ${result.data.image_mp4_url}`);
-      var response= {
-        "attachment": {
-          "type": "template",
-          "payload": {
-             "template_type": "media",
-             "elements": [
-                {
-                   "media_type": "image",
-                   "url": result.data.image_mp4_url
-                }
-             ]
-          }
-        }
-      }
+      var response= {"text": "https://media2.giphy.com/media/xUOwG53NTy146baj2o/giphy.mp4"};
       console.log(`response: ${response}`);
       callSendAPI(sender_psid, response);
 
