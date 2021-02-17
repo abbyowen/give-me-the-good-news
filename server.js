@@ -132,6 +132,7 @@ function handlePostback(sender_psid, received_postback) {
 
   else if (payload === 'other') {
     response = {"text": "Cool, I'll Look."}
+    getOtherArticles(sender_psid);
   }
 
   console.log(`response: ${response}`);
@@ -160,8 +161,8 @@ function callSendAPI(sender_psid, response) {
   });
 }
 
-function getOtherArticles() {
-  var response = fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
+function getOtherArticles(sender_psid) {
+  fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
     data => data.json()).then(function(result) {
       var str ='';
       console.log(`result length: ${result.length}`);
@@ -170,7 +171,8 @@ function getOtherArticles() {
        str = str + result[i].title + " ";
      }
      console.log(`str: ${str}`);
-     return {'text': `HELLO! ${str}`};
+     response = {'text': `HELLO! ${str}`};
+     callSendAPI(sender_psid, response);
     });
-  return response;
+
 }
