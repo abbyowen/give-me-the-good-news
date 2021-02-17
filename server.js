@@ -132,8 +132,9 @@ function handlePostback(sender_psid, received_postback) {
 
   else if (payload === 'other') {
     fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
-      data => data.json()
-    );
+      data => data.json()).then(function(result) {
+        console.log(result);
+      });
   }
   console.log(`response: ${response}`);
   callSendAPI(sender_psid, response);
