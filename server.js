@@ -166,10 +166,10 @@ function getOtherArticles(sender_psid) {
     data =>data.json()).then(function(result) {
       console.log(`result: ${result.results}`);
       var str ='';
-      console.log(`result length: ${result.length}`);
-      for (var i=0; i<result.length; i++) {
-        console.log(`title: ${result[i].title}`);
-        str = str + result[i].title + " ";
+      console.log(`result length: ${result.results.length}`);
+      for (var i=0; i<result.results.length; i++) {
+        console.log(`title: ${result.results[i].title}`);
+        str = str + result.results[i].title + " ";
      }
      console.log(`str: ${str}`);
      response = {'text': `HELLO! ${str}`};
