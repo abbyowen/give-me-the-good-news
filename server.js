@@ -298,7 +298,7 @@ function getGIPHY(sender_psid) {
 }
 
 function getVaccineNews(sender_psid) {
-  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=vaccine&sort=newest&api_key=${NYT_KEY}`).then(
+  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=vaccine&sort=newest&api-key=${NYT_KEY}`).then(
     data=>data.json()).then(function(result) {
       console.log(result);
     });
