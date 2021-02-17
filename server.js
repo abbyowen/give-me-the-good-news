@@ -167,14 +167,14 @@ function callSendAPI(sender_psid, response) {
 function getOtherArticles() {
   var response = fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
     data => data.json()).then(function(result) {
-      console.log(result);
       var str ='';
+      console.log(`result length: ${result.length}`);
       for (var i=0; i<result.length; i++) {
         console.log(`title: ${result[i].title}`);
        str = str + result[i].title + " ";
      }
      console.log(`str: ${str}`);
-     return {'text': str};
+     return {'text': `HELLO! ${str}`};
     });
   return response;
 }
