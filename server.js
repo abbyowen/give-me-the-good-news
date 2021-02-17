@@ -158,8 +158,14 @@ function handlePostback(sender_psid, received_postback) {
     }
   }
   else if (payload === 'top_stories') {
-    response = {"text": "Alright, I'll take a look."}  
+    response = {"text": "Alright, I'll take a look."}
     getOtherArticles(sender_psid);
+  }
+
+  else if (payload === 'not_top_stories') {
+    response = {'text': "Ok. I won't lie, you are hard to please. I'll find something for you."}
+    getMovieReview(sender_psid);
+
   }
 
   console.log(`response: ${response}`);
@@ -202,5 +208,41 @@ function getOtherArticles(sender_psid) {
      response = {'text': `HELLO! ${str}`};
      callSendAPI(sender_psid, response);
     });
+
+}
+
+function getMovieReview(sender_psid) {
+  fetch(`https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-opening-date&api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
+    data=>data.json()).then(function(result) {
+      console.log(`result: ${result.results}`);
+      var idx = Math.floor((Math.random() * result.results.length) + 1);
+      console.log(`review idx: ${idx}`);
+      var review = result.results[idx];
+      var str = "Here is a recent movie review. I hope this can distract you from the world!"
+      response = {'text': str};
+      callSendAPI(sender_psird, response);
+
+      var response_2 = {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": [{
+              "title": `Movie review for ${result.results[idx].display_title}`,
+              "subtitle": "I hope it's good! And if it's not, even better, you can laugh at it!",
+              "default_action": {
+              "type": "web_url",
+              "url": result.results[idx].link.url,
+              "webview_height_ratio": "tall",
+            }
+
+            }]
+          }
+        }
+
+      }
+      callSendAPI(sender_psid, response_2);
+    });
+
 
 }
