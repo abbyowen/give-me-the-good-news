@@ -230,6 +230,7 @@ function getOtherArticles(sender_psid) {
      }
      console.log(`articles: ${articles}`);
      for (var k=0; k<articles.length; k++) {
+       console.log(articles[k].title);
        var response = {
          "attachment": {
            "type": "template",
