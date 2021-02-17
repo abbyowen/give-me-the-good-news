@@ -133,7 +133,12 @@ function handlePostback(sender_psid, received_postback) {
   else if (payload === 'other') {
     fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
       data => data.json()).then(function(result) {
-        console.log(result);
+        var str ='';
+        for (var i=0; i<result.length; i++) {
+         str = str + result[i].title + " ";
+       }
+       console.log(`str: ${str}`);
+       response = {'text': str};
       });
   }
   console.log(`response: ${response}`);
