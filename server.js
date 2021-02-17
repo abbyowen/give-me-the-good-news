@@ -248,7 +248,6 @@ function getMovieReview(sender_psid) {
 function getGIPHY(sender_psid) {
   fetch(`https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_KEY}&tag=&rating=pg-13`).then(
     data=>data.json()).then(function(result) {
-      console.log(result);
       var response= {
         "attachment": {
           "type": "template",
@@ -257,12 +256,13 @@ function getGIPHY(sender_psid) {
              "elements": [
                 {
                    "media_type": "video",
-                   "url": result.data.url
+                   "url": result.data.image_mp4_url
                 }
              ]
           }
         }
       }
+      console.log(`response: ${response}`);
       callSendAPI(sender_psid, response);
 
 
