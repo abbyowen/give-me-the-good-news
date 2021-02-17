@@ -319,6 +319,7 @@ function getVaccineNews(sender_psid) {
         var snippet = articles[i].snippet;
         var url = articles[i].web_url;
         var title = articles[i].main;
+        console.log(`main title: ${title}`);
         console.log(snippet);
 
         var analyzeParams = {
