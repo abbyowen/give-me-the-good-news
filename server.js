@@ -222,10 +222,24 @@ function getOtherArticles(sender_psid) {
         }
         if (include == true) {
           console.log(`including title: ${title}`);
-          var url = result.results.url;
-          console.log(url);
+          var url = result.results[i].url;
+
           var response = {
-            "text": `${title}: ${url}`
+            "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "generic",
+                "elements": [{
+                  "title": title,
+                  "subtitle": "Click to read.",
+                  "default_action": {
+                  "type": "web_url",
+                  "url": url,
+                  "webview_height_ratio": "tall",
+                }
+                }]
+              }
+            }
           }
           callSendAPI(sender_psid, response);
         }
