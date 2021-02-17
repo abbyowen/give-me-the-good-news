@@ -207,7 +207,6 @@ function getOtherArticles(sender_psid) {
     function(result) {
       console.log(result);
 
-      var articles = [];
       console.log(`result length: ${result.results.length}`);
       for (var i=0; i<result.results.length; i++) {
         var title = result.results[i].title;
@@ -221,35 +220,26 @@ function getOtherArticles(sender_psid) {
         if (include == true) {
           console.log(`including title: ${title}`);
           var url = result.results.url;
-          articles.push({
-            "title": title,
-            "url": url
-          });
-
+          var response = {
+            "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "generic",
+                "elements": [{
+                  "title": title,
+                  "default_action": {
+                    "type": "web_url",
+                    "url": url,
+                    "webview_height_ratio": "tall"
+                  }
+                }]
+              }
+            }
+          }
+          callSendAPI(sender_psid, response);
         }
      }
-     console.log(`articles: ${articles}`);
-     for (var k=0; k<articles.length; k++) {
-       console.log(articles[k].title);
-       var response = {
-         "attachment": {
-           "type": "template",
-           "payload": {
-             "template_type": "generic",
-             "elements": [{
-               "title": articles[k].title,
-               "default_action": {
-               "type": "web_url",
-               "url": articles[k].url,
-               "webview_height_ratio": "tall",
-             }
-             }]
-           }
-         }
-      }
-      console.log(response);
-      callSendAPI(sender_psid, response);
-     }
+
     });
 
 }
