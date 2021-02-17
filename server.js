@@ -317,6 +317,8 @@ function getVaccineNews(sender_psid) {
       var articles = result.response.docs;
       for (var i=0; i<articles.length; i++) {
         var snippet = articles[i].snippet;
+        var url = articles[i].web_url;
+        var headline = articles[i].headline;
         console.log(snippet);
 
         var analyzeParams = {
@@ -331,6 +333,29 @@ function getVaccineNews(sender_psid) {
       naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
         console.log(`result score: ${analysisResults.result.sentiment.document.score}`);
         console.log(`result sentiment: ${analysisResults.result.sentiment.document.label}`);
+        var sentiment = analysisResults.result.sentiment.document.label;
+        if (sentiment == "positive") {
+          var response = {
+            "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "generic",
+                "elements": [{
+                  "title": headline,
+                  "subtitle": "Click to read.",
+                  "default_action": {
+                  "type": "web_url",
+                  "url": url,
+                  "webview_height_ratio": "tall",
+                }
+                }]
+              }
+            }
+          }
+          callSendAPI(sender_psid, response);
+
+        }
+
         }).catch(err => {
           console.log('error:', err);
         });
