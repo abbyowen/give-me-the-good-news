@@ -323,9 +323,8 @@ function getVaccineNews(sender_psid) {
           'text': snippet,
           'features': {
             'sentiment': {
-              'targets': [
-                'vaccine'
-            ]
+              'document': true
+
           }
         }
       }
