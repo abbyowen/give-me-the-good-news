@@ -220,7 +220,7 @@ function getMovieReview(sender_psid) {
       var review = result.results[idx];
       var str = "Here is a recent movie review. I hope this can distract you from the world!"
       response = {'text': str};
-      callSendAPI(sender_psird, response);
+      callSendAPI(sender_psid, response);
 
       var response_2 = {
         "attachment": {
