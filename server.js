@@ -225,36 +225,27 @@ function getOtherArticles(sender_psid) {
             "title": title,
             "default_action": {
               "type": "web_url",
-              "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+              "url": url,
               "messenger_extensions": false,
               "webview_height_ratio": "tall"
             }
           });
 
         }
-
-
-
      }
      console.log(`articles: ${articles}`);
-     response = {"attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "list",
-        "top_element_style": "compact",
-        "elements": [
-          articles
-        ],
-         "buttons": [
-          {
-            "title": "View More",
-            "type": "postback",
-            "payload": "payload"
-          }
-        ]
+     response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "list",
+          "top_element_style": "compact",
+          "elements": [
+            articles
+          ]
+        }
       }
     }
-  }
     console.log(response);
      callSendAPI(sender_psid, response);
     });
