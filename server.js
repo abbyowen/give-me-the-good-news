@@ -166,7 +166,15 @@ function handlePostback(sender_psid, received_postback) {
 
   else if (payload === 'not_top_stories') {
     response = {'text': "Ok. I won't lie, you are hard to please. I'll find something for you."}
-    getGIPHY(sender_psid);
+    var num = Math.floor((Math.random() * 2) + 1);
+    if (num == 1) {
+      console.log("Getting movie review");
+      getMovieReview(sender_psid);
+    }
+    else if (num == 2) {
+      console.log("Getting GIF");
+      getGIPHY(sender_psid);
+    }
 
   }
 
@@ -249,7 +257,7 @@ function getGIPHY(sender_psid) {
   fetch(`https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_KEY}&tag=&rating=pg-13`).then(
     data=>data.json()).then(function(result) {
       console.log(`result: ${result.data.image_mp4_url}`);
-      var response= {"text": "https://media2.giphy.com/media/xUOwG53NTy146baj2o/giphy.mp4"};
+      var response= {"text": `Alright, heres a random GIF that hopefully will brighten your day: ${result.data.image_mp4_url}`};
       console.log(`response: ${response}`);
       callSendAPI(sender_psid, response);
 
