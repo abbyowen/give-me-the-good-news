@@ -140,12 +140,9 @@ function handlePostback(sender_psid, received_postback) {
           str = str + body_JSON.results[i].title + " ";
         }
         response = {'text': str};*/
-        }
       });
-      }
+    }
 
-    });
-  }
   console.log(response);
   callSendAPI(sender_psid, response);
 }
