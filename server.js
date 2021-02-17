@@ -329,7 +329,8 @@ function getVaccineNews(sender_psid) {
         }
       }
       naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
-        console.log(`result: ${analysisResults.result.sentiment.document}`);
+        console.log(`result score: ${analysisResults.result.sentiment.document.score}`);
+        console.log(`result sentiment: ${analysisResults.result.sentiment.document.label}`);
         }).catch(err => {
           console.log('error:', err);
         });
