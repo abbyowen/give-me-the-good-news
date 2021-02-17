@@ -131,7 +131,7 @@ function handlePostback(sender_psid, received_postback) {
   }
 
   else if (payload === 'other') {
-    request({
+    response = request({
       "uri": `https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`,
       "method": "GET"
     }, (err, res, body) => {
@@ -143,10 +143,11 @@ function handlePostback(sender_psid, received_postback) {
         for (var i=0; i<body_JSON.results.length; i++) {
           str = str + body_JSON.results[i].title + " ";
         }
-        response = {'text': str};
+        return {'text': str};
 
       } else {
         console.log('An error occured'+error);
+        return {'text': "An error occured in fetching your optimism"}
       }
 
     });
