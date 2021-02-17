@@ -120,13 +120,11 @@ function handlePostback(sender_psid, received_postback) {
                 "title": "Anything Else",
                 "payload": "other",
               }
-
             ],
           }]
         }
       }
     }
-
   }
   else if (payload === 'no') {
     response = {'text': "Ugh I get it. Come back whenever you are ready, your friendly neighborhood good news bot will be here."}
@@ -207,15 +205,29 @@ function callSendAPI(sender_psid, response) {
 function getOtherArticles(sender_psid) {
   fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
     data =>data.json()).then(function(result) {
-      console.log(`result: ${result.results}`);
-      var str ='';
+      var articles = [];
       console.log(`result length: ${result.results.length}`);
       for (var i=0; i<result.results.length; i++) {
-        console.log(`title: ${result.results[i].title}`);
-        str = str + result.results[i].title + " ";
+        var title = result.results[i].title;
+        var target_words = ["trump", "COVID", "coronavirus", "pandemic", "lockdown", "bad", "sad"];
+        var include = true;
+        for (var j=0; j<words.length; j++) {
+          if (title.includes(words[j])) {
+            include = false;
+          }
+        }
+        if (include == true) {
+          console.log(`including title: ${title}`);
+          var url = result.results.url;
+          articles.push(url);
+
+        }
+
+
+
      }
-     console.log(`str: ${str}`);
-     response = {'text': `HELLO! ${str}`};
+     console.log(`articles: ${articles}`);
+     response = {'text': `HELLO!`};
      callSendAPI(sender_psid, response);
     });
 
@@ -254,7 +266,7 @@ function getMovieReview(sender_psid) {
 }
 
 function getGIPHY(sender_psid) {
-  fetch(`https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_KEY}&tag=&rating=pg-13`).then(
+  fetch(`https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_KEY}&tag=funny&rating=pg-13`).then(
     data=>data.json()).then(function(result) {
       console.log(`result: ${result.data.image_mp4_url}`);
       var response= {"text": `Alright, heres a random GIF that hopefully will brighten your day: ${result.data.image_mp4_url}`};
