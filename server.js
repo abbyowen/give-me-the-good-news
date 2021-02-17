@@ -223,13 +223,13 @@ function getOtherArticles(sender_psid) {
         if (include == true) {
           console.log(`including title: ${title}`);
           var url = result.results.url;
-          var response = {
+          var response = {"text": title/*
             "attachment": {
               "type": "template",
               "payload": {
                 "template_type": "generic",
                 "elements": [{
-                  "title": "hi",
+                  "title": title,
                   "default_action": {
                     "type": "web_url",
                     "url": url,
@@ -237,7 +237,7 @@ function getOtherArticles(sender_psid) {
                   }
                 }]
               }
-            }
+            }*/
           }
           callSendAPI(sender_psid, response);
         }
