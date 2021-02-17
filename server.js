@@ -132,6 +132,7 @@ function handlePostback(sender_psid, received_postback) {
 
   else if (payload === 'other') {
     getOtherArticles().then(function(data) {
+      console.log(data);
       response = data;
     });
     console.log(response);
@@ -163,8 +164,8 @@ function callSendAPI(sender_psid, response) {
   });
 }
 
-async function getOtherArticles() {
-  var response = await fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
+function getOtherArticles() {
+  var response = fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
     data => data.json()).then(function(result) {
       var str ='';
       for (var i=0; i<result.length; i++) {
