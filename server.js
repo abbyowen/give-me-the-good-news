@@ -143,6 +143,7 @@ function handlePostback(sender_psid, received_postback) {
         for (var i=0; i<body_JSON.results.length; i++) {
           str = str + body_JSON.results[i].title + " ";
         }
+        console.log(`str: ${str}`);
         return {'text': str};
 
       } else {
@@ -152,7 +153,7 @@ function handlePostback(sender_psid, received_postback) {
 
     });
   }
-  console.log(response);
+  console.log(`response: ${response}`);
   callSendAPI(sender_psid, response);
 }
 
