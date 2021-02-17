@@ -13,6 +13,12 @@ const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 const GIPHY_KEY = `k53sbC4lOlagxBH8PGoX4EDFEuxRSrBK`;
 const NYT_KEY = 'txHI43IcrawEsJzOm3NTPW2BtEEtnotb';
 
+var AYLIENTextAPI = require('aylien_textapi');
+var textapi = new AYLIENTextAPI({
+  application_id: "0665e838",
+  application_key: "4dfda6c1b2862a8c021e181a9f3f7738"
+});
+
 app.listen(process.env.PORT || 8888, () => console.log('webhook is listening'));
 
 app.post('/webhook', function(req, res) {
@@ -305,6 +311,11 @@ function getVaccineNews(sender_psid) {
       for (var i=0; i<articles.length; i++) {
         var snippet = articles[i].snippet;
         console.log(snippet);
+        textapi.sentiment({'text': snippet}, function(error, response) {
+          if (error === null) {
+            console.log(response);
+          }
+        });
       }
     });
 
