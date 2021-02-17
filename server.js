@@ -131,22 +131,17 @@ function handlePostback(sender_psid, received_postback) {
   }
 
   else if (payload === 'other') {
-    request({
-      "uri": `https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`,
-      "method": "GET"
-    }, (err, res, body) => {
-      if (!err) {
-        var body_JSON = JSON.parse(body);
-
-        var str =''
+    fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`)
+      .then(data => data.json()).then(function(response) {
+        console.log(repsonse);
+        /*var str =''
 
         for (var i=0; i<body_JSON.results.length; i++) {
           str = str + body_JSON.results[i].title + " ";
         }
-        response = {'text': "DONE!"};
-
-      } else {
-        console.log('An error occured'+error);
+        response = {'text': str};*/
+        }
+      });
       }
 
     });
