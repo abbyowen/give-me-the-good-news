@@ -131,7 +131,7 @@ function handlePostback(sender_psid, received_postback) {
   }
 
   else if (payload === 'other') {
-    respone = {`text`: "Cool, I'll Look."}
+    response = {"text": "Cool, I'll Look."}
   }
 
   console.log(`response: ${response}`);
