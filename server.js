@@ -1,3 +1,6 @@
+
+
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express().use(bodyParser.json());
@@ -210,7 +213,7 @@ function getOtherArticles(sender_psid) {
       console.log(`result length: ${result.results.length}`);
       for (var i=0; i<result.results.length; i++) {
         var title = result.results[i].title;
-        var target_words = ["Trump", "COVID", "coronavirus", "pandemic", "lockdown", "bad", "sad", "Disease", "Covid-19", "Covid", "Impeachment", "Impeached"];
+        var target_words = ["Trump", "COVID", "Coronavirus", "Pandemic", "Lockdown", "Bad", "Sad", "Disease", "Covid-19", "Covid", "Impeachment", "Impeached", "Dies", "Die"];
         var include = true;
         for (var j=0; j<target_words.length; j++) {
           if (title.includes(target_words[j])) {
@@ -226,7 +229,7 @@ function getOtherArticles(sender_psid) {
               "payload": {
                 "template_type": "generic",
                 "elements": [{
-                  "title": title,
+                  "title": "hi",
                   "default_action": {
                     "type": "web_url",
                     "url": url,
