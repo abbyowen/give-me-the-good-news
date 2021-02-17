@@ -223,31 +223,32 @@ function getOtherArticles(sender_psid) {
           var url = result.results.url;
           articles.push({
             "title": title,
-            "default_action": {
-              "type": "web_url",
-              "url": url,
-              "messenger_extensions": false,
-              "webview_height_ratio": "tall"
-            }
+            "url": url
           });
 
         }
      }
      console.log(`articles: ${articles}`);
-     var response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "list",
-          "top_element_style": "compact",
-          "elements": [
-            articles
-          ]
-        }
+     for (var k=0; k<articles.length; k++) {
+       var response = {
+         "attachment": {
+           "type": "template",
+           "payload": {
+             "template_type": "generic",
+             "elements": [{
+               "title": articles[k].title,
+               "default_action": {
+               "type": "web_url",
+               "url": articles[k].url,
+               "webview_height_ratio": "tall",
+             }
+             }]
+           }
+         }
       }
-    }
-    console.log(response);
-    callSendAPI(sender_psid, response);
+      console.log(response);
+      callSendAPI(sender_psid, response);
+     }
     });
 
 }
