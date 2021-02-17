@@ -131,7 +131,9 @@ function handlePostback(sender_psid, received_postback) {
   }
 
   else if (payload === 'other') {
-    response = getOtherArticles();
+    getOtherArticles().then(function(data) {
+      response = data;
+    });
     console.log(response);
   }
 
