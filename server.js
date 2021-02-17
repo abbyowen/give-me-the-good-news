@@ -256,7 +256,7 @@ function getGIPHY(sender_psid) {
              "template_type": "media",
              "elements": [
                 {
-                   "media_type": "video",
+                   "media_type": "image",
                    "url": result.data.image_mp4_url
                 }
              ]
