@@ -318,7 +318,7 @@ function getVaccineNews(sender_psid) {
       for (var i=0; i<articles.length; i++) {
         var snippet = articles[i].snippet;
         var url = articles[i].web_url;
-        var headline = articles[i].headline;
+        var title = articles[i].main;
         console.log(snippet);
 
         var analyzeParams = {
@@ -341,7 +341,7 @@ function getVaccineNews(sender_psid) {
               "payload": {
                 "template_type": "generic",
                 "elements": [{
-                  "title": headline,
+                  "title": title,
                   "subtitle": "Click to read.",
                   "default_action": {
                   "type": "web_url",
