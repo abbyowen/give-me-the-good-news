@@ -211,7 +211,7 @@ function getOtherArticles(sender_psid) {
       console.log(`result length: ${result.results.length}`);
       for (var i=0; i<result.results.length; i++) {
         var title = result.results[i].title;
-        var target_words = ["trump", "COVID", "coronavirus", "pandemic", "lockdown", "bad", "sad"];
+        var target_words = ["Trump", "COVID", "coronavirus", "pandemic", "lockdown", "bad", "sad", "Disease", "Covid-19"];
         var include = true;
         for (var j=0; j<target_words.length; j++) {
           if (title.includes(target_words[j])) {
