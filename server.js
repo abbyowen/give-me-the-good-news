@@ -301,6 +301,11 @@ function getVaccineNews(sender_psid) {
   fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=vaccine&sort=newest&api-key=${NYT_KEY}`).then(
     data=>data.json()).then(function(result) {
       console.log(result);
+      var articles = result.response.docs;
+      for (var i=0; i<articles.length; i++) {
+        var snippet = articles[i].snippet;
+        console.log(snippet);
+      }
     });
 
 }
