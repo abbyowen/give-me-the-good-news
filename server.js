@@ -205,6 +205,9 @@ function callSendAPI(sender_psid, response) {
 function getOtherArticles(sender_psid) {
   fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
     function(result) {
+      console.log(result);
+      console.log(result.json());
+      
       var articles = [];
       console.log(`result length: ${result.results.length}`);
       for (var i=0; i<result.results.length; i++) {
