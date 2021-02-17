@@ -11,6 +11,7 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
 const GIPHY_KEY = `k53sbC4lOlagxBH8PGoX4EDFEuxRSrBK`;
+const NYT_KEY = 'txHI43IcrawEsJzOm3NTPW2BtEEtnotb';
 
 app.listen(process.env.PORT || 8888, () => console.log('webhook is listening'));
 
@@ -179,6 +180,11 @@ function handlePostback(sender_psid, received_postback) {
 
   }
 
+  else if (payload === 'vaccines') {
+    response = {"text": "Let's see if there is any positive news on the COVID-19 Vaccine front today."};
+    getVaccineNews(sender_psid);
+  }
+
   console.log(`response: ${response}`);
   callSendAPI(sender_psid, response);
 }
@@ -206,14 +212,14 @@ function callSendAPI(sender_psid, response) {
 }
 
 function getOtherArticles(sender_psid) {
-  fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(data=>data.json()).then(
+  fetch(`https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=${NYT_KEY}`).then(data=>data.json()).then(
     function(result) {
       console.log(result);
 
       console.log(`result length: ${result.results.length}`);
       for (var i=0; i<result.results.length; i++) {
         var title = result.results[i].title;
-        var target_words = ["Trump", "COVID", "Coronavirus", "Pandemic", "Lockdown", "Bad", "Sad", "Disease", "Covid-19", "Covid", "Impeachment", "Impeached", "Dies", "Die"];
+        var target_words = ["Trump", "COVID", "Coronavirus", "Pandemic", "Lockdown", "Bad", "Sad", "Disease", "Covid-19", "Covid", "Impeachment", "Impeached", "Dies", "Die", "Senate", "Lonely", "coronavirus"];
         var include = true;
         for (var j=0; j<target_words.length; j++) {
           if (title.includes(target_words[j])) {
@@ -249,7 +255,7 @@ function getOtherArticles(sender_psid) {
 }
 
 function getMovieReview(sender_psid) {
-  fetch(`https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-opening-date&api-key=${'txHI43IcrawEsJzOm3NTPW2BtEEtnotb'}`).then(
+  fetch(`https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-opening-date&api-key=${NYT_KEY}`).then(
     data=>data.json()).then(function(result) {
       console.log(`result: ${result.results}`);
       var idx = Math.floor((Math.random() * result.results.length) + 1);
@@ -288,7 +294,13 @@ function getGIPHY(sender_psid) {
       console.log(`response: ${response}`);
       callSendAPI(sender_psid, response);
 
-
-
   });
+}
+
+function getVaccineNews(sender_psid) {
+  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=vaccine&sort=newest&api_key=${NYT_KEY}`).then(
+    data=>data.json()).then(function(result) {
+      console.log(result);
+    })
+  )
 }
