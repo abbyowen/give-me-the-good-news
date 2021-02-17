@@ -7,6 +7,8 @@ const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
+const GIPHY_KEY = `k53sbC4lOlagxBH8PGoX4EDFEuxRSrBK`;
+
 app.listen(process.env.PORT || 8888, () => console.log('webhook is listening'));
 
 app.post('/webhook', function(req, res) {
@@ -164,7 +166,7 @@ function handlePostback(sender_psid, received_postback) {
 
   else if (payload === 'not_top_stories') {
     response = {'text': "Ok. I won't lie, you are hard to please. I'll find something for you."}
-    getMovieReview(sender_psid);
+    getGIPHY(sender_psid);
 
   }
 
@@ -218,7 +220,7 @@ function getMovieReview(sender_psid) {
       var idx = Math.floor((Math.random() * result.results.length) + 1);
       console.log(`review idx: ${idx}`);
       var review = result.results[idx];
-      var str = "Here is a recent movie review. I hope this can distract you from the world!"
+      var str = `Here is a recent movie review for the film ${result.results[idx].display_title}. I hope this can distract you from the world!`
       response = {'text': str};
       callSendAPI(sender_psid, response);
 
@@ -235,14 +237,35 @@ function getMovieReview(sender_psid) {
               "url": result.results[idx].link.url,
               "webview_height_ratio": "tall",
             }
-
             }]
           }
         }
-
       }
       callSendAPI(sender_psid, response_2);
     });
+}
+
+function getGIPHY(sender_psid) {
+  fetch(`https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_KEY}&tag=&rating=pg-13`).then(
+    data=>data.json()).then(function(result) {
+      console.log(result);
+      var response= {
+        "attachment": {
+          "type": "template",
+          "payload": {
+             "template_type": "media",
+             "elements": [
+                {
+                   "media_type": "video",
+                   "url": result.data.url
+                }
+             ]
+          }
+        }
+      }
+      callSendAPI(sender_psid, response);
 
 
+
+  });
 }
