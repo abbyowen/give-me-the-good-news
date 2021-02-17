@@ -131,7 +131,34 @@ function handlePostback(sender_psid, received_postback) {
   }
 
   else if (payload === 'other') {
-    response = {"text": "Cool, I'll Look."}
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Cool. Do you want to look at the most shared stories today?",
+            "subtitle": "Tap an option",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes",
+                "payload": "top_stories",
+              },
+              {
+                "type": "postback",
+                "title": "No",
+                "payload": "not_top_stories",
+              }
+
+            ],
+          }]
+        }
+      }
+    }
+  }
+  else if (payload === 'top_stories') {
+    response = {"text": "Alright, I'll take a look."}  
     getOtherArticles(sender_psid);
   }
 
