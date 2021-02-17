@@ -315,6 +315,9 @@ function getVaccineNews(sender_psid) {
           if (error === null) {
             console.log(response);
           }
+          else {
+            console.log(error);
+          }
         });
       }
     });
