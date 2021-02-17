@@ -170,6 +170,7 @@ function getOtherArticles() {
       console.log(result);
       var str ='';
       for (var i=0; i<result.length; i++) {
+        console.log(`title: ${result[i].title}`);
        str = str + result[i].title + " ";
      }
      console.log(`str: ${str}`);
