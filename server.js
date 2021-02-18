@@ -198,6 +198,11 @@ function handlePostback(sender_psid, received_postback) {
     getVaccineNews(sender_psid);
   }
 
+  else if (payload === 'cases') {
+    response = {"text": "Let's see if there is any positive news on the COVID-19 front today."};
+    getCOVIDNews(sender_psid);
+  }
+
   console.log(`response: ${response}`);
   callSendAPI(sender_psid, response);
 }
@@ -316,6 +321,17 @@ function getVaccineNews(sender_psid) {
       console.log(result);
       var articles = result.response.docs;
       getSentiment(sender_psid, articles, "vaccine");
+
+    });
+
+}
+
+function getCOVIDNews(sender_psid) {
+  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=vaccine&sort=newest&api-key=${NYT_KEY}`).then(
+    data=>data.json()).then(function(result) {
+      console.log(result);
+      var articles = result.response.docs;
+      getSentiment(sender_psid, articles, "coronavirus");
 
     });
 
