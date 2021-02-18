@@ -331,7 +331,7 @@ function getCOVIDNews(sender_psid) {
     data=>data.json()).then(function(result) {
       console.log(result);
       var articles = result.response.docs;
-      getSentiment(sender_psid, articles, "coronavirus");
+      getSentiment(sender_psid, articles, " ");
 
     });
 
