@@ -327,7 +327,7 @@ function getVaccineNews(sender_psid) {
 }
 
 function getCOVIDNews(sender_psid) {
-  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=coronavirus&sort=newest&api-key=${NYT_KEY}`).then(
+  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=coronavirus&sort=relevance&api-key=${NYT_KEY}`).then(
     data=>data.json()).then(function(result) {
       console.log(result);
       var articles = result.response.docs;
