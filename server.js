@@ -315,59 +315,61 @@ function getVaccineNews(sender_psid) {
     data=>data.json()).then(function(result) {
       console.log(result);
       var articles = result.response.docs;
-      getSentiment(sender_psid, articles);
+      getSentiment(sender_psid, articles, "vaccine");
 
     });
 
 }
 
-async function getSentiment(sender_psid, articles) {
+async function getSentiment(sender_psid, articles, keyword) {
+
   for (var i=0; i<articles.length; i++) {
     var snippet = articles[i].snippet;
     var url = articles[i].web_url;
     var abstract = articles[i].abstract;
     console.log(snippet);
     console.log(abstract);
+    if (abstract.includes(keyword)) {
+      var analyzeParams = {
+        'text': abstract,
+        'features': {
+          'sentiment': {
+            'document': true
 
-    var analyzeParams = {
-      'text': abstract,
-      'features': {
-        'sentiment': {
-          'document': true
-
+        }
       }
     }
-  }
-    await naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
-      console.log(`result score: ${analysisResults.result.sentiment.document.score}`);
-      console.log(`result sentiment: ${analysisResults.result.sentiment.document.label}`);
-      var sentiment = analysisResults.result.sentiment.document.label;
-      if (sentiment == "positive" || sentiment == "neutral") {
-        var response = {
-          "attachment": {
-            "type": "template",
-            "payload": {
-              "template_type": "generic",
-              "elements": [{
-                "title": snippet,
-                "subtitle": "Click to read.",
-                "default_action": {
-                "type": "web_url",
-                "url": url,
-                "webview_height_ratio": "tall",
+      await naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
+        console.log(`result score: ${analysisResults.result.sentiment.document.score}`);
+        console.log(`result sentiment: ${analysisResults.result.sentiment.document.label}`);
+        var sentiment = analysisResults.result.sentiment.document.label;
+        if (sentiment == "positive" || sentiment == "neutral") {
+          var response = {
+            "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "generic",
+                "elements": [{
+                  "title": snippet,
+                  "subtitle": "Click to read.",
+                  "default_action": {
+                  "type": "web_url",
+                  "url": url,
+                  "webview_height_ratio": "tall",
+                }
+                }]
               }
-              }]
             }
           }
-        }
-        console.log(response);
-        callSendAPI(sender_psid, response);
+          console.log(response);
+          callSendAPI(sender_psid, response);
+
+      }
+
+      }).catch(err => {
+        console.log('error:', err);
+      });
 
     }
-
-    }).catch(err => {
-      console.log('error:', err);
-    });
-
   }
 }
