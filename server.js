@@ -323,7 +323,7 @@ function getVaccineNews(sender_psid) {
         console.log(abstract);
 
         var analyzeParams = {
-          'text': ,
+          'text': abstract,
           'features': {
             'sentiment': {
               'document': true
