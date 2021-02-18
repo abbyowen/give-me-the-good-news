@@ -318,12 +318,12 @@ function getVaccineNews(sender_psid) {
       for (var i=0; i<articles.length; i++) {
         var snippet = articles[i].snippet;
         var url = articles[i].web_url;
-        var title = articles[i].abstract;
-        console.log(`main title: ${title}`);
+        var abstract = articles[i].abstract;
         console.log(snippet);
+        console.log(abstract);
 
         var analyzeParams = {
-          'text': snippet,
+          'text': ,
           'features': {
             'sentiment': {
               'document': true
@@ -335,14 +335,14 @@ function getVaccineNews(sender_psid) {
         console.log(`result score: ${analysisResults.result.sentiment.document.score}`);
         console.log(`result sentiment: ${analysisResults.result.sentiment.document.label}`);
         var sentiment = analysisResults.result.sentiment.document.label;
-        if (sentiment == "positive") {
+        if (sentiment == "positive" || sentiment == "neutral") {
           var response = {
             "attachment": {
               "type": "template",
               "payload": {
                 "template_type": "generic",
                 "elements": [{
-                  "title": title,
+                  "title": snippet,
                   "subtitle": "Click to read.",
                   "default_action": {
                   "type": "web_url",
