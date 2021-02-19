@@ -410,6 +410,9 @@ function getCOVIDNews(sender_psid) {
 }
 // Get article sentiment by abstract content
 async function getSentiment(sender_psid, articles, keyword) {
+  // Keep track of how many articles are sent to the user
+  var sent = 0;
+
   // Iterate through each article
   for (var i=0; i<articles.length; i++) {
     // Article snippet
@@ -459,6 +462,7 @@ async function getSentiment(sender_psid, articles, keyword) {
             }
           }
           console.log(response);
+          sent++;
           callSendAPI(sender_psid, response);
 
       }
@@ -468,5 +472,10 @@ async function getSentiment(sender_psid, articles, keyword) {
       });
 
     }
+  }
+  // Send the user a message if no articles matching the criteria can be found
+  if (sent == 0){
+    var response = {"text": "I'm sorry, we couldn't find any positively spun articles. Click another option or check back later."}
+    callSendAPI(sender_psid, response);
   }
 }
