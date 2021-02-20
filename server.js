@@ -265,7 +265,7 @@ function getOtherArticles(sender_psid) {
         // Article title
         var title = result.results[i].title;
         // Words to avoid (political, virus, negative)
-        var target_words = ["Trump", "COVID", "Coronavirus", "Pandemic", "Lockdown", "Bad", "Sad", "Disease", "Covid-19", "Covid", "Impeachment", "Impeached", "Dies", "Die", "Senate", "Lonely", "coronavirus", "Senator", "Governer"];
+        var target_words = ["Trump", "COVID", "Coronavirus", "Pandemic", "Lockdown", "Bad", "Sad", "Disease", "Covid-19", "Covid", "Impeachment", "Impeached", "Dies", "Die", "Senate", "Lonely", "coronavirus", "Senator", "Governer", "Killed", "killed", "crisis", "Crisis", "vaccinated", "Vaccinated"];
         // Include variable: if true, include article. if false, exclude article
         var include = true;
         for (var j=0; j<target_words.length; j++) {
